@@ -2,10 +2,12 @@
 
 return [
     'database' => [
-        'host' => 'localhost',
-        'port' => 3306,
-        'dbname' => 'myapp',
-        'charset' => 'utf8mb4'
+        'host'     => getenv('DB_HOST') ?: 'localhost',
+        'port'     => (int) (getenv('DB_PORT') ?: 3306),
+        'dbname'   => getenv('DB_NAME') ?: 'myapp',
+        'charset'  => 'utf8mb4',
+        'username' => getenv('DB_USER') ?: 'root',
+        'password' => getenv('DB_PASSWORD') ?: '',
     ],
 
     //

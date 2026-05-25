@@ -11,6 +11,10 @@ class Database
 
     public function __construct($config, $username = 'root', $password = '')
     {
+        $username = $config['username'] ?? $username;
+        $password = $config['password'] ?? $password;
+        unset($config['username'], $config['password']);
+
         $dsn = 'mysql:' . http_build_query($config, '', ';');
 
         $this->connection = new PDO($dsn, $username, $password, [

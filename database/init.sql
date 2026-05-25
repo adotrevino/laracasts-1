@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS myapp;
+
+USE myapp;
+
+CREATE TABLE IF NOT EXISTS notes (
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    user_id    INT          NOT NULL DEFAULT 1,
+    body       TEXT         NOT NULL,
+    created_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
