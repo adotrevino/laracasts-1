@@ -1,20 +1,12 @@
 FROM php:8.3-cli
 
-# Paquetes base
+# Paquetes base + cliente MySQL compatible (funciona con MySQL 8.0)
+# Para el cliente MySQL nativo usa: docker compose exec db mysql ...
 RUN apt-get update && apt-get install -y \
-    gnupg \
     curl \
     unzip \
     git \
-    && rm -rf /var/lib/apt/lists/*
-
-# Repositorio oficial MySQL 8.0 para obtener mysql-client real (no MariaDB)
-RUN curl -fsSL https://repo.mysql.com/RPM-GPG-KEY-mysql-2023 \
-      | gpg --dearmor -o /usr/share/keyrings/mysql-archive-keyring.gpg \
-    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/mysql-archive-keyring.gpg] https://repo.mysql.com/apt/debian bookworm mysql-8.0" \
-      > /etc/apt/sources.list.d/mysql.list \
-    && apt-get update \
-    && apt-get install -y mysql-client \
+    default-mysql-client \
     && rm -rf /var/lib/apt/lists/*
 
 # Extensiones PHP - pdo_mysql usa mysqlnd (bundled), sin librerías externas
